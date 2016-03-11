@@ -40,7 +40,7 @@ namespace Lab2_0._2
 
             return true;
         }
-        public bool IsSquareThreaten(int PosX, int PosY, Player currentPlayer, Player opponentPlayer)
+        public bool IsSquareThreaten(int PosX, int PosY, Player opponentPlayer)
         {
             /* Kontrollerar om aktuell ruta är hotad av motståndaren, främst för kungen
             som aldrig får flytta till hotad ruta men skulle gå att använda för att förbättra AIn 
@@ -48,8 +48,8 @@ namespace Lab2_0._2
 
             foreach (Piece piece in opponentPlayer.Pieces)
             {
-                if(piece.IsMoveValid(PosX, PosY, currentPlayer, opponentPlayer))
-                    { return true; }
+                return false;
+                // TODO pawns valid choise gäller endast om där redan är någon på platsen för check
             }
 
             return false;
