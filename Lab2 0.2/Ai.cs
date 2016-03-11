@@ -22,8 +22,8 @@ namespace Lab2_0._2
                     if (ownPiece.IsMoveValid(opponentPiece.PosX, opponentPiece.PosY, currentPlayer, opponentPlayer))
                     {
                         validMove = true;
-                        ownPiece.MovePiece(opponentPiece.PosX, opponentPiece.PosY); // Flyttar egen pjäs
                         opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs
+                        ownPiece.MovePiece(opponentPiece.PosX, opponentPiece.PosY); // Flyttar egen pjäs                  
                         break;
                     }
                 }
@@ -56,6 +56,35 @@ namespace Lab2_0._2
             }
      
 
+        }
+
+        public void MoveKing(Player currentPlayer, Player opponentPlayer)
+        {
+            // Lagrar kungen i variabel.
+            Piece king = null;
+
+            foreach (Piece ownPiece in currentPlayer.Pieces)
+            {
+                if (ownPiece.Type == "king") { king = ownPiece; }
+            }
+
+            // Plockar ut nuvarande Position och försöker flytta.
+            int kingPosX = king.PosX;
+            int kingPosY = king.PosY;
+
+            if (king.IsMoveValid(kingPosX - 1, kingPosY - 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 1, kingPosY - 1); return; }
+            if (king.IsMoveValid(kingPosX - 1, kingPosY - 0, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 1, kingPosY - 0); return; }
+            if (king.IsMoveValid(kingPosX - 1, kingPosY + 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 1, kingPosY + 1); return; }
+            if (king.IsMoveValid(kingPosX - 0, kingPosY - 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 0, kingPosY - 1); return; }
+            if (king.IsMoveValid(kingPosX - 0, kingPosY + 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 0, kingPosY + 1); return; }
+            if (king.IsMoveValid(kingPosX + 1, kingPosY - 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX + 1, kingPosY - 1); return; }
+            if (king.IsMoveValid(kingPosX + 1, kingPosY - 0, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX + 1, kingPosY - 0); return; }
+            if (king.IsMoveValid(kingPosX + 1, kingPosY + 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX + 1, kingPosY + 1); return; }
+
+            Console.WriteLine();
+            Console.WriteLine("{0} is checkmate, {1} is the the winner", currentPlayer.Color, opponentPlayer.Color);
+            Console.ReadKey();
+            
         }
     }
 }

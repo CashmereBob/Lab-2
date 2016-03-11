@@ -50,13 +50,38 @@ namespace Lab2_0._2
         public void RemoveBeatenPiece(Piece beatenPiece, Piece winningPiece)
         {
 
-            Console.WriteLine("{0} {1} at {2}.{3} was beaten by {4} {5} from {6}.{7}", beatenPiece.Color, beatenPiece.Type, beatenPiece.PosX + 1, beatenPiece.PosY + 1, winningPiece.Color, winningPiece.Type, winningPiece.PosX + 1, winningPiece.PosY + 1);
+            Console.WriteLine();
+            Console.WriteLine("{4} {5} at {6}.{7} ** BEATS ** {0} {1} from {2}.{3}", beatenPiece.Color, beatenPiece.Type, beatenPiece.PosX + 1, beatenPiece.PosY + 1, winningPiece.Color, winningPiece.Type, winningPiece.PosX + 1, winningPiece.PosY + 1);
             Pieces.Remove(beatenPiece);
             Console.ReadKey();
         }
 
-        public bool IsKingSafe()
+        public bool IsKingSafe(Player currentPlayer, Player opponentPlayer)
         {
+
+            // kontrollerar positionen på kungen.
+            int KingPosX = -1;
+            int KingPosY = -1;
+
+            foreach (Piece ownPiece in Pieces)
+            {
+                if(ownPiece.Type == "king")
+                {
+                    KingPosX = ownPiece.PosX;
+                    KingPosY = ownPiece.PosY;
+                }
+            }
+
+            // Kontrollerar om motspelaren har pjäs som hotar kungen.
+
+            foreach (Piece opponentPiece in opponentPlayer.Pieces)
+            {
+                if (opponentPiece.IsMoveValid(KingPosX, KingPosY, opponentPlayer, currentPlayer))
+                {
+                    return false;  
+                }
+            }
+
             return true;
         }
 

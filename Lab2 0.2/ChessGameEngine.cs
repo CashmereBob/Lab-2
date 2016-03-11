@@ -13,7 +13,7 @@ namespace Lab2_0._2
         Player _black;
         Ui _ui;
         Ai _ai;
-        Player _lastPlayer;
+        Player _opponentPlayer;
         Player _currentPlayer;
 
         public ChessGameEngine()
@@ -23,7 +23,7 @@ namespace Lab2_0._2
             _black = new Player("black");
             _ui = new Ui();
             _ai = new Ai();
-            _lastPlayer = _white;
+            _opponentPlayer = _white;
             _currentPlayer = _black;
             UpdateGame();
 
@@ -31,27 +31,42 @@ namespace Lab2_0._2
         private void UpdateGame()
         {
             // Uppdaterar brädet med det nya draget
-            _gameboard.UppdatePlayerPiecesOnBoard(_currentPlayer, _lastPlayer);
+            _gameboard.UppdatePlayerPiecesOnBoard(_currentPlayer, _opponentPlayer);
 
             // Skriver ut spelbrädet
             _ui.PrintBoard(_gameboard);
 
             // Sätter nuvarande spelare som sist spelande runda.
-            _lastPlayer = _currentPlayer;
+            _opponentPlayer = _currentPlayer;
         }
 
         public void Turn()
         {
             // Kontrollerar vems tur det är genom att kontrollera vilken den senaste spelaren var.
-            if (_lastPlayer == _black)
+            if (_opponentPlayer == _black)
             { _currentPlayer = _white; }
-            else if (_lastPlayer == _white)
+            else if (_opponentPlayer == _white)
             { _currentPlayer = _black; }
 
-            // Räknar ut och gör nästa drag.
-            _ai.CalculateBestMove(_currentPlayer, _lastPlayer);
+            // Kontrollera så att kungen safe är true annars försök flytta, om flytta ej går vinner motståndaren.
+            if (_currentPlayer.IsKingSafe(_currentPlayer, _opponentPlayer))
+            {
+                // Räknar ut och gör nästa drag.
+                _ai.CalculateBestMove(_currentPlayer, _opponentPlayer);
 
-            UpdateGame();
+                UpdateGame();
+                
+            }
+            else
+            {
+                // Försök flytta kungen.
+                _ai.MoveKing(_currentPlayer, _opponentPlayer);
+
+                UpdateGame();
+                
+            } 
+
+            
 
         }
 

@@ -14,7 +14,9 @@ namespace Lab2_0._2
 
             Console.ReadKey();
 
-            while (true)
+            bool gameContinue = true;
+
+            while (gameContinue)
             {
                 game.Turn();
 
