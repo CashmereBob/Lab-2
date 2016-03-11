@@ -9,6 +9,33 @@ namespace Lab2_0._2
     class Ui
     {
         public void PrintBoard(Board board)
-        {}
+        {
+            Console.Clear();
+
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    if (board.GameBoard[x,y] == null)
+                    {
+                        Console.Write("     ");
+                    }
+                    else
+                    { 
+                    StringBuilder newType = new StringBuilder();
+                    newType.Append(board.GameBoard[x, y].Color[0]);
+                    newType.Append(board.GameBoard[x, y].Type[0].ToString().ToUpper());
+                    newType.Append(board.GameBoard[x, y].Type[1]);
+
+                    string output = newType.ToString();
+                    Console.Write(" " + output + " ");
+                    }
+                }
+
+                Console.Write("\n");
+                Console.Write("\n");
+            }
+
+        }
     }
 }

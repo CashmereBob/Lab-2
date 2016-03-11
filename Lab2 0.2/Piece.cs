@@ -19,17 +19,30 @@ namespace Lab2_0._2
             this.PosY = PosY;
             this.Color = color;
         }
-        public void MovePiece(Piece piece)
+        public void MovePiece(int newPosX, int newPosY)
         {
-            int newPosX;
-            int newPosY;
+            // sätter de nya kordinaterna efter flytt
+            PosX = newPosX;
+            PosY = newPosY;  
         }
-        public virtual bool IsMoveValid(int newPosX, int newPosY)
+        public virtual bool IsMoveValid(int newPosX, int newPosY, Player currentPlayer, Player opponentPlayer)
         { return false; }
         public virtual void CheckOpponentPieceInReach()
         { }
-        public virtual void GetOpponentPieceInReach()
-        { }
+        public virtual bool IsSquereClear(int newPosX, int newPosY, Player currentPlayer)
+        {
+            /* Kontrollerar listan spelarens lista med pjäser, om den nya positionen matchar en position 
+            som redan används av en medspelande pjäs returneras false */
+                foreach (Piece piece in currentPlayer.Pieces)
+                {
+                    if (piece.PosX == newPosX && piece.PosY == newPosY)
+                    {
+                        return false;
+                    }
+                }
+
+            return true;
+        }
         
     }
 }

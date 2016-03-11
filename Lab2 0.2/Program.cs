@@ -10,6 +10,16 @@ namespace Lab2_0._2
     {
         static void Main(string[] args)
         {
+            var game = new ChessGameEngine();
+
+            Console.ReadKey();
+
+            while (true)
+            {
+                game.Turn();
+
+                Console.ReadKey();
+            }
         }
     }
 }

@@ -23,28 +23,36 @@ namespace Lab2_0._2
             _black = new Player("black");
             _ui = new Ui();
             _ai = new Ai();
-            _lastPlayer = _black;
-            Turn();
+            _lastPlayer = _white;
+            _currentPlayer = _black;
+            UpdateGame();
 
         }
-        
+        private void UpdateGame()
+        {
+            // Uppdaterar brädet med det nya draget
+            _gameboard.UppdatePlayerPiecesOnBoard(_currentPlayer, _lastPlayer);
+
+            // Skriver ut spelbrädet
+            _ui.PrintBoard(_gameboard);
+
+            // Sätter nuvarande spelare som sist spelande runda.
+            _lastPlayer = _currentPlayer;
+        }
+
         public void Turn()
         {
             // Kontrollerar vems tur det är genom att kontrollera vilken den senaste spelaren var.
             if (_lastPlayer == _black)
             { _currentPlayer = _white; }
             else if (_lastPlayer == _white)
-            { _currentPlayer = _white; }
+            { _currentPlayer = _black; }
 
             // Räknar ut och gör nästa drag.
             _ai.CalculateBestMove(_currentPlayer, _lastPlayer);
 
-            // Uppdaterar brädet med det nya draget
-            _gameboard.UppdatePlayerPiecesOnBoard(_currentPlayer);
+            UpdateGame();
 
-            // Skriver ut spelbrädet
-            _ui.PrintBoard(_gameboard);
-                
         }
 
     }

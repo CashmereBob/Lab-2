@@ -14,6 +14,7 @@ namespace Lab2_0._2
         public Player(string color)
         {
             Color = color;
+            Pieces = new List<Piece>();
             InitiatePieces();
         }
 
