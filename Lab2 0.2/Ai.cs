@@ -72,19 +72,34 @@ namespace Lab2_0._2
             int kingPosX = king.PosX;
             int kingPosY = king.PosY;
 
-            if (king.IsMoveValid(kingPosX - 1, kingPosY - 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 1, kingPosY - 1); return; }
-            else if (king.IsMoveValid(kingPosX - 1, kingPosY - 0, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 1, kingPosY - 0); return; }
-            else if (king.IsMoveValid(kingPosX - 1, kingPosY + 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 1, kingPosY + 1); return; }
-            else if (king.IsMoveValid(kingPosX - 0, kingPosY - 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 0, kingPosY - 1); return; }
-            else if (king.IsMoveValid(kingPosX - 0, kingPosY + 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX - 0, kingPosY + 1); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX + 1, kingPosY - 1); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 0, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX + 1, kingPosY - 0); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY + 1, currentPlayer, opponentPlayer)) { king.MovePiece(kingPosX + 1, kingPosY + 1); return; }
+            if (king.IsMoveValid(kingPosX - 1, kingPosY - 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX - 1, kingPosY - 0, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 0, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX - 1, kingPosY + 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY + 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX - 0, kingPosY - 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY - 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX - 0, kingPosY + 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY + 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 0, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 0, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX + 1, kingPosY + 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY + 1, king, opponentPlayer); return; }
 
             Console.WriteLine();
             Console.WriteLine("{0} is checkmate, {1} is the the winner", currentPlayer.Color, opponentPlayer.Color);
             Console.ReadKey();
             
+        }
+
+        private void BeatIfColide(int posX, int posY, Piece ownPiece, Player opponentPlayer )
+        {
+            foreach (Piece opponentPiece in opponentPlayer.Pieces)
+            {
+                if (opponentPiece.PosX == posX && opponentPiece.PosY == posY)
+                {
+                    opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs
+                    break;
+                }
+            }
+
+            ownPiece.MovePiece(posX, posY);// Flyttar egen pjäs  
+
         }
     }
 }

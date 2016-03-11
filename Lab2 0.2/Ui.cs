@@ -12,7 +12,7 @@ namespace Lab2_0._2
         {
             Console.Clear();
             Console.WriteLine();
-            Console.WriteLine("        1     2     3     4     5     6     7     8");
+            Console.WriteLine("        A     B     C     D     E     F     G     H");
             Console.WriteLine("     -------------------------------------------------");
             for (int x = 0; x < 8; x++)
             {

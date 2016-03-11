@@ -51,7 +51,7 @@ namespace Lab2_0._2
         {
 
             Console.WriteLine();
-            Console.WriteLine("{4} {5} at {6}.{7} ** BEATS ** {0} {1} from {2}.{3}", beatenPiece.Color, beatenPiece.Type, beatenPiece.PosX + 1, beatenPiece.PosY + 1, winningPiece.Color, winningPiece.Type, winningPiece.PosX + 1, winningPiece.PosY + 1);
+            Console.WriteLine("{4} {5} at {6}.{7} ** BEATS ** {0} {1} from {2}.{3}", beatenPiece.Color, beatenPiece.Type, beatenPiece.PosX + 1, IntToChar(beatenPiece.PosY), winningPiece.Color, winningPiece.Type, winningPiece.PosX + 1, IntToChar(winningPiece.PosY));
             Pieces.Remove(beatenPiece);
             Console.ReadKey();
         }
@@ -85,5 +85,12 @@ namespace Lab2_0._2
             return true;
         }
 
+        private char IntToChar(int index)
+        {
+            
+            string letters = "ABCDEFGH";
+
+            return letters[index];
+        }
     }
 }
