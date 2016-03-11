@@ -6,18 +6,27 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    interface Piece
+    abstract class Piece
     {
-        int PosX { get; }
-        int PosY { get; }
-        string Type { get; }
-        string Color { get; }
-        List<Piece> OpponentPiecesInReach { get; }
-        void Piece(int posX, int posY, string color);
-        void MovePiece(int newPosX, int newPosY);
-        bool IsMoveValid(int newPosX, int newPosY);
-        void CheckOpponentPieceInReach();
-        void GetOpponentPieceInReach();
+        public int PosX { get; protected set; }
+        public int PosY { get; protected set; }
+        public string Type { get; protected set; }
+        public string Color { get; protected set; }
+        public List<Piece> OpponentPiecesInReach { get; protected set; }
+        public Piece (int posX, int posY, string color)
+        {
+            this.PosX = posX;
+            this.PosY = PosY;
+            this.Color = color;
+        }
+        public virtual void MovePiece(int newPosX, int newPosY)
+        { }
+        public virtual bool IsMoveValid(int newPosX, int newPosY)
+        { return false; }
+        public virtual void CheckOpponentPieceInReach()
+        { }
+        public virtual void GetOpponentPieceInReach()
+        { }
         
     }
 }

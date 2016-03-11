@@ -8,74 +8,12 @@ namespace Lab2_0._2
 {
     class King : Piece
     {
-        private int _posX;
-        private int _posY;
-        private string _type;
-        private string _color;
-        private List<Piece> _opponentPiecesInReach;
-        public List<Piece> OpponentPiecesInReach
+        public King(int posX, int posY, string color) : base (posX, posY, color)
         {
-            get
-            {
-                return _opponentPiecesInReach;
-            }
-        }
-
-        public int PosX
-        {
-            get
-            {
-                return _posX;
-            }
-        }
-
-        public int PosY
-        {
-            get
-            {
-                return _posY;
-            }
-        }
-
-        public string Type
-        {
-            get
-            {
-                return _type;
-            }
-        }
-        public string Color
-        {
-            get
-            {
-                return _color;
-            }
-        }
-        public void Piece(int posX, int posY, string color)
-        {
-            _posX = posX;
-            _posY = posY;
-            _color = color;
-            _type = "king";
-        }
-        public void CheckOpponentPieceInReach()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void GetOpponentPieceInReach()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IsMoveValid(int newPosX, int newPosY)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void MovePiece(int newPosX, int newPosY)
-        {
-            throw new NotImplementedException();
+            this.PosX = posX;
+            this.PosY = posY;
+            this.Color = color;
+            this.Type = "bishop";
         }
 
     }
