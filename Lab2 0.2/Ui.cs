@@ -8,5 +8,7 @@ namespace Lab2_0._2
 {
     class Ui
     {
+        public void PrintBoard(Board board)
+        {}
     }
 }

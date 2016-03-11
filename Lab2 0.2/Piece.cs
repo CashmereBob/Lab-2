@@ -19,8 +19,11 @@ namespace Lab2_0._2
             this.PosY = PosY;
             this.Color = color;
         }
-        public virtual void MovePiece(int newPosX, int newPosY)
-        { }
+        public void MovePiece(Piece piece)
+        {
+            int newPosX;
+            int newPosY;
+        }
         public virtual bool IsMoveValid(int newPosX, int newPosY)
         { return false; }
         public virtual void CheckOpponentPieceInReach()

@@ -8,5 +8,10 @@ namespace Lab2_0._2
 {
     class Ai
     {
+        public void CalculateBestMove(Player currentPlayer, Player opponentPlayer)
+        {
+            
+        }
+        public void RandomMove() { }
     }
 }
