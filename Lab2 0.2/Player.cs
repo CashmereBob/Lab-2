@@ -37,16 +37,22 @@ namespace Lab2_0._2
             //Plaserar Bönder i y led på rad2 och lägger in i Players lista av pjäser
             for (int y = 0; y < 8; y++)
             {
-                var piece = new Pawn(row2, y, Color);
-                Pieces.Add(piece);
+                var pawn = new Pawn(row2, y, Color);
+                Pieces.Add(pawn);
             }
 
-            
+            var king = new King(row1, 4, Color);
+            Pieces.Add(king);
+
+
         }
 
-        public void RemoveBeatenPiece(Piece piece)
+        public void RemoveBeatenPiece(Piece beatenPiece, Piece winningPiece)
         {
-            Pieces.Remove(piece);
+
+            Console.WriteLine("{0} {1} at {2}.{3} was beaten by {4} {5} from {6}.{7}", beatenPiece.Color, beatenPiece.Type, beatenPiece.PosX + 1, beatenPiece.PosY + 1, winningPiece.Color, winningPiece.Type, winningPiece.PosX + 1, winningPiece.PosY + 1);
+            Pieces.Remove(beatenPiece);
+            Console.ReadKey();
         }
 
         public bool IsKingSafe()

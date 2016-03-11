@@ -23,7 +23,7 @@ namespace Lab2_0._2
                     {
                         validMove = true;
                         ownPiece.MovePiece(opponentPiece.PosX, opponentPiece.PosY); // Flyttar egen pjäs
-                        opponentPlayer.RemoveBeatenPiece(opponentPiece); // slår ut motståndarens pjäs
+                        opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs
                         break;
                     }
                 }

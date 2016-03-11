@@ -11,11 +11,19 @@ namespace Lab2_0._2
         public void PrintBoard(Board board)
         {
             Console.Clear();
-
+            Console.WriteLine();
+            Console.WriteLine("        1     2     3     4     5     6     7     8");
+            Console.WriteLine("     -------------------------------------------------");
             for (int x = 0; x < 8; x++)
             {
+                Console.Write("  ");
+                Console.Write(x + 1);
+                Console.Write("  ");
+                Console.Write("|");
+
                 for (int y = 0; y < 8; y++)
                 {
+                    
                     if (board.GameBoard[x,y] == null)
                     {
                         Console.Write("     ");
@@ -30,9 +38,11 @@ namespace Lab2_0._2
                     string output = newType.ToString();
                     Console.Write(" " + output + " ");
                     }
+                    Console.Write("|");
                 }
 
                 Console.Write("\n");
+                Console.Write("     -------------------------------------------------");
                 Console.Write("\n");
             }
 

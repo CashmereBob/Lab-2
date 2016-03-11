@@ -12,7 +12,6 @@ namespace Lab2_0._2
         public int PosY { get; protected set; }
         public string Type { get; protected set; }
         public string Color { get; protected set; }
-        public List<Piece> OpponentPiecesInReach { get; protected set; }
         public Piece (int posX, int posY, string color)
         {
             this.PosX = posX;
@@ -27,8 +26,6 @@ namespace Lab2_0._2
         }
         public virtual bool IsMoveValid(int newPosX, int newPosY, Player currentPlayer, Player opponentPlayer)
         { return false; }
-        public virtual void CheckOpponentPieceInReach()
-        { }
         public virtual bool IsSquereClear(int newPosX, int newPosY, Player currentPlayer)
         {
             /* Kontrollerar listan spelarens lista med pjäser, om den nya positionen matchar en position 

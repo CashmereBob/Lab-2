@@ -41,7 +41,7 @@ namespace Lab2_0._2
                 twoStep = -2;
             }
 
-            // Samtliga kontrolle kontrollerar om "IsSquereClear" mot både egna och motståndarens pjäser.
+            // Samtliga kontroller kontrollerar om "IsSquereClear" mot både egna och motståndarens pjäser.
 
             // Kontrollerar om pawn står på första raden, har då möjlighet att flytta 1 eller 2 steg.
             if (PosX == startingRow && PosY == newPosY)
