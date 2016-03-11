@@ -56,7 +56,19 @@ namespace Lab2_0._2
                     if (piece.PosX == PosX - 1 && piece.PosY == PosY + 1) { return true; }
                     if (piece.PosX == PosX + 1 && piece.PosY == PosY + 1) { return true; }
                     if (piece.PosX == PosX + 1 && piece.PosY == PosY - 1) { return true; }
-                } else if (piece.IsMoveValid(PosX, PosY, opponentPlayer, currentPlayer)) { return true; }
+                }
+                else if (piece.Type == "king")
+                {
+                    if (piece.PosX == PosX - 1 && piece.PosY == PosY - 1) { return true; }
+                    if (piece.PosX == PosX - 1 && piece.PosY == PosY + 1) { return true; }
+                    if (piece.PosX == PosX + 1 && piece.PosY == PosY + 1) { return true; }
+                    if (piece.PosX == PosX + 1 && piece.PosY == PosY - 1) { return true; }
+                    if (piece.PosX == PosX - 1 && piece.PosY == PosY - 0) { return true; }
+                    if (piece.PosX == PosX - 0 && piece.PosY == PosY - 1) { return true; }
+                    if (piece.PosX == PosX - 0 && piece.PosY == PosY + 1) { return true; }
+                    if (piece.PosX == PosX + 1 && piece.PosY == PosY - 0) { return true; }
+                }
+                else if (piece.IsMoveValid(PosX, PosY, opponentPlayer, currentPlayer)) { return true; }
 
                 
                 
