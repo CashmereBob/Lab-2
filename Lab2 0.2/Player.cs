@@ -44,6 +44,12 @@ namespace Lab2_0._2
             var king = new King(row1, 4, Color);
             Pieces.Add(king);
 
+            var knightOne = new Knight(row1, 1, Color);
+            var knightTwo = new Knight(row1, 6, Color);
+            Pieces.Add(knightOne);
+            Pieces.Add(knightTwo);
+
+
 
         }
 
@@ -82,10 +88,10 @@ namespace Lab2_0._2
                 }
                 else if (opponentPiece.Type == "pawn")
                 {
-                    if (opponentPiece.PosX == KingPosX - 1 && opponentPiece.PosY == KingPosY - 1) { return true; }
-                    if (opponentPiece.PosX == KingPosX - 1 && opponentPiece.PosY == KingPosY + 1) { return true; }
-                    if (opponentPiece.PosX == KingPosX + 1 && opponentPiece.PosY == KingPosY + 1) { return true; }
-                    if (opponentPiece.PosX == KingPosX + 1 && opponentPiece.PosY == KingPosY - 1) { return true; }
+                    if (opponentPiece.PosX == KingPosX - 1 && opponentPiece.PosY == KingPosY - 1) { return false; }
+                    if (opponentPiece.PosX == KingPosX - 1 && opponentPiece.PosY == KingPosY + 1) { return false; }
+                    if (opponentPiece.PosX == KingPosX + 1 && opponentPiece.PosY == KingPosY + 1) { return false; }
+                    if (opponentPiece.PosX == KingPosX + 1 && opponentPiece.PosY == KingPosY - 1) { return false; }
                 }
 
             }
