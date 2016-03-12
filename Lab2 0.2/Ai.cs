@@ -19,7 +19,7 @@ namespace Lab2_0._2
             {
                 foreach (Piece ownPiece in currentPlayer.Pieces)
                 {
-                    if (ownPiece.IsMoveValid(opponentPiece.PosX, opponentPiece.PosY, currentPlayer, opponentPlayer))
+                    if (ownPiece.IsMoveValid(opponentPiece.PosX, opponentPiece.PosY, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(opponentPiece.PosX, opponentPiece.PosY, ownPiece, currentPlayer, opponentPlayer))
                     {
                         validMove = true;
                         opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs
@@ -45,7 +45,7 @@ namespace Lab2_0._2
 
                 foreach (Piece piece in currentPlayer.Pieces)
                 {
-                    if (piece.IsMoveValid(newX, newY, currentPlayer, opponentPlayer))
+                    if (piece.IsMoveValid(newX, newY, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(newX, newY, piece, currentPlayer, opponentPlayer))
                     {
                         validMove = true;
                         piece.MovePiece(newX, newY); // flyttar egen pjäs
@@ -72,14 +72,14 @@ namespace Lab2_0._2
             int kingPosX = king.PosX;
             int kingPosY = king.PosY;
 
-            if (king.IsMoveValid(kingPosX - 1, kingPosY - 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX - 1, kingPosY - 0, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 0, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX - 1, kingPosY + 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY + 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX - 0, kingPosY - 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY - 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX - 0, kingPosY + 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY + 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 0, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 0, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY + 1, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY + 1, king, opponentPlayer); return; }
+            if (king.IsMoveValid(kingPosX - 1, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX - 1, kingPosY - 0, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY - 0, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 0, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX - 1, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY + 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX - 0, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 0, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY - 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX - 0, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 0, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY + 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 1, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 0, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY - 0, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 0, king, opponentPlayer); return; }
+            else if (king.IsMoveValid(kingPosX + 1, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY + 1, king, opponentPlayer); return; }
 
             Console.WriteLine();
             Console.WriteLine("{0} is checkmate, {1} is the the winner", currentPlayer.Color, opponentPlayer.Color);
@@ -89,6 +89,8 @@ namespace Lab2_0._2
 
         private void BeatIfColide(int posX, int posY, Piece ownPiece, Player opponentPlayer )
         {
+            // Om tvångsflyttat pjäs (kung) koliderar med motståndare slås denna ut.
+
             foreach (Piece opponentPiece in opponentPlayer.Pieces)
             {
                 if (opponentPiece.PosX == posX && opponentPiece.PosY == posY)
@@ -101,5 +103,30 @@ namespace Lab2_0._2
             ownPiece.MovePiece(posX, posY);// Flyttar egen pjäs  
 
         }
+
+        private bool IsKingSafeAfterMove(int newPosX, int newPosY, Piece ownPiece, Player currentPlayer, Player opponentPlayer)
+        {
+            // kontrollerar så att kungen är safe efter att pjäsen flyttats innan en flytt görs.
+
+            int oldPosX = ownPiece.PosX;
+            int oldPosY = ownPiece.PosY;
+
+            ownPiece.MovePiece(newPosX, newPosY);
+
+            if (currentPlayer.IsKingSafe(currentPlayer, opponentPlayer))
+            {
+                ownPiece.MovePiece(oldPosX, oldPosY);
+                return true;
+            }
+            else
+            {
+                ownPiece.MovePiece(oldPosX, oldPosY);
+                return false;
+            }
+
+
+            
+        }
+        
     }
 }

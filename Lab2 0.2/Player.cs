@@ -80,6 +80,14 @@ namespace Lab2_0._2
                 {
                     return false;  
                 }
+                else if (opponentPiece.Type == "pawn")
+                {
+                    if (opponentPiece.PosX == KingPosX - 1 && opponentPiece.PosY == KingPosY - 1) { return true; }
+                    if (opponentPiece.PosX == KingPosX - 1 && opponentPiece.PosY == KingPosY + 1) { return true; }
+                    if (opponentPiece.PosX == KingPosX + 1 && opponentPiece.PosY == KingPosY + 1) { return true; }
+                    if (opponentPiece.PosX == KingPosX + 1 && opponentPiece.PosY == KingPosY - 1) { return true; }
+                }
+
             }
 
             return true;

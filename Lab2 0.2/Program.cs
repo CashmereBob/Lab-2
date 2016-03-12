@@ -20,7 +20,7 @@ namespace Lab2_0._2
             {
                 game.Turn();
 
-                Console.ReadKey();
+                
             }
         }
     }
