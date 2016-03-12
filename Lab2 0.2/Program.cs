@@ -8,6 +8,7 @@ namespace Lab2_0._2
 {
     class Program
     {
+        
         static void Main(string[] args)
         {
             var game = new ChessGameEngine();
@@ -20,7 +21,10 @@ namespace Lab2_0._2
             {
                 game.Turn();
 
-                
+                Console.WriteLine();
+                Console.WriteLine("     Press any key to initiate next turn");
+                Console.ReadKey();
+               
             }
         }
     }
