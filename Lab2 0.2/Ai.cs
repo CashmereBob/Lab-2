@@ -76,14 +76,24 @@ namespace Lab2_0._2
             int kingPosY = king.PosY;
 
 
-            for (int x = 0; x < 8; x++)
-            {
-                for (int y = 0; y < 8; y++)
+                for (int x = 0; x < 8; x++)
                 {
+                    for (int y = 0; y < 8; y++)
+                    {
+
                     if (king.IsMoveValid(x, y, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(x, y, king, currentPlayer, opponentPlayer)) { BeatIfColide(x, y, king, opponentPlayer); return; }
+                    foreach (Piece ownPiece in currentPlayer.Pieces)
+                    {
+                        if(ownPiece.IsMoveValid(x, y, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer)) { BeatIfColide(x, y, ownPiece, opponentPlayer); return; }
+                        
+                    }
+                    
+
                 }
 
-            }
+                }
+
+                
 
             Console.WriteLine();
             Console.WriteLine("{0} is checkmate, {1} is the the winner", currentPlayer.Color, opponentPlayer.Color);
