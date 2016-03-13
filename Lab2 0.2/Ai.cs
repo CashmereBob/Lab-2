@@ -75,22 +75,14 @@ namespace Lab2_0._2
             int kingPosX = king.PosX;
             int kingPosY = king.PosY;
 
-            int counter = 0;
 
-            while (counter < 1000)
+            for (int x = 0; x < 8; x++)
             {
-                Random random = new Random();
-                int move = random.Next(8);
-                counter++;
+                for (int y = 0; y < 8; y++)
+                {
+                    if (king.IsMoveValid(x, y, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(x, y, king, currentPlayer, opponentPlayer)) { BeatIfColide(x, y, king, opponentPlayer); return; }
+                }
 
-                if (move == 0 && king.IsMoveValid(kingPosX - 1, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 1, king, opponentPlayer); return; }
-                if (move == 1 && king.IsMoveValid(kingPosX - 1, kingPosY - 0, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY - 0, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 0, king, opponentPlayer); return; }
-                if (move == 2 && king.IsMoveValid(kingPosX - 1, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY + 1, king, opponentPlayer); return; }
-                if (move == 3 && king.IsMoveValid(kingPosX - 0, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 0, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY - 1, king, opponentPlayer); return; }
-                if (move == 4 && king.IsMoveValid(kingPosX - 0, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 0, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY + 1, king, opponentPlayer); return; }
-                if (move == 5 && king.IsMoveValid(kingPosX + 1, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 1, king, opponentPlayer); return; }
-                if (move == 6 && king.IsMoveValid(kingPosX + 1, kingPosY - 0, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY - 0, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 0, king, opponentPlayer); return; }
-                if (move == 7 && king.IsMoveValid(kingPosX + 1, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY + 1, king, opponentPlayer); return; }
             }
 
             Console.WriteLine();
@@ -149,7 +141,7 @@ namespace Lab2_0._2
                 {
                     foreach (Piece ownPiece in currentPlayer.Pieces)
                     {
-                        if (ownPiece.IsMoveValid(x,y,currentPlayer,opponentPlayer) && !IsKingSafeAfterMove(x,y,ownPiece,opponentPlayer,currentPlayer) && IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer))
+                        if (ownPiece.IsMoveValid(x,y,currentPlayer,opponentPlayer) && !IsKingSafeAfterMove(x,y,ownPiece,opponentPlayer,currentPlayer) && IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer) && !ownPiece.IsSquareThreaten(x,y,currentPlayer,opponentPlayer))
                         {
                             ownPiece.MovePiece(x, y);
                             BeatIfColide(x, y, ownPiece, opponentPlayer);

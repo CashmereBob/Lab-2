@@ -40,13 +40,13 @@ namespace Lab2_0._2
 
             return true;
         }
-      /*  public bool IsSquareThreaten(int PosX, int PosY, Player currentPlayer, Player opponentPlayer) 
+      public bool IsSquareThreaten(int PosX, int PosY, Player currentPlayer, Player opponentPlayer) 
         {
-            Kontrollerar om aktuell ruta är hotad av motståndaren, främst för kungens skull
+            /*Kontrollerar om aktuell ruta är hotad av motståndaren, främst för kungens skull
             som aldrig får flytta till hotad ruta men skulle gå att använda för att förbättra AIn 
             Loopar igenom motståndarens pjäser för att se om vald ruta är ett valid move för denna.
             Separerat pawn och king från loopen med if satser för att undvika infinite loop på king
-            samt eftersom pawn inte har "validMove" till rutor om där inte redan står en opponent.
+            samt eftersom pawn inte har "validMove" till rutor om där inte redan står en opponent.*/
 
             foreach (Piece piece in opponentPlayer.Pieces)
             {
@@ -75,7 +75,7 @@ namespace Lab2_0._2
 
             return false;
         }
-    */
+    
 
     }
 }
