@@ -44,9 +44,13 @@ namespace Lab2_0._2
         {
             // Kontrollerar vems tur det är genom att kontrollera vilken den senaste spelaren var.
             if (_opponentPlayer == _black)
-            { _currentPlayer = _white; }
+            {
+                _currentPlayer = _white;
+            }
             else if (_opponentPlayer == _white)
-            { _currentPlayer = _black; }
+            {
+                _currentPlayer = _black;
+            }
 
             // Kontrollera så att kungen safe är true annars försök flytta, om flytta ej går vinner motståndaren.
             if (_currentPlayer.IsKingSafe(_currentPlayer, _opponentPlayer))

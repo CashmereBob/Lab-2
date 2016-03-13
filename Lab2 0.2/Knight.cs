@@ -8,6 +8,9 @@ namespace Lab2_0._2
 {
     class Knight : Piece
     {
+        //int[] xmove = { -1,  1, -2,  2, -2,  2, -1,  1}; //Improvment later
+        //int[] ymove = {  2,  2,  1,  1, -1, -1, -2, -2};
+
         public Knight(int posX, int posY, string color) : base (posX, posY, color)
         {
             this.PosX = posX;

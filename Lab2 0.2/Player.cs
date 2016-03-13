@@ -49,8 +49,13 @@ namespace Lab2_0._2
             Pieces.Add(knightOne);
             Pieces.Add(knightTwo);
 
+            Pieces.Add(new Rook(row1, 0, Color));
+            Pieces.Add(new Rook(row1, 7, Color));
 
+            Pieces.Add(new Bishop(row1, 2, Color));
+            Pieces.Add(new Bishop(row1, 5, Color));
 
+            Pieces.Add(new Queen(row1, 3, Color));
         }
 
         public void RemoveBeatenPiece(Piece beatenPiece, Piece winningPiece)
