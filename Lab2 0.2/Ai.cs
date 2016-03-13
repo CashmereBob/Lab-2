@@ -13,23 +13,26 @@ namespace Lab2_0._2
             /* Loopar igenom motståndarens pjäser för att se om någon av dessa går att slå av egna pjäser
             genom att för varje motståndar pjäs kontrollera om dess kordinater är ett valid move av egna pjäser.
             Om det inte finns några tillgängliga pjäser att slå avslutas metoden med att kalla på random move*/
-            bool validMove = false;
-
-            foreach (Piece opponentPiece in opponentPlayer.Pieces)
+            if (!MoveToThreatOpponentKing(currentPlayer, opponentPlayer))
             {
-                foreach (Piece ownPiece in currentPlayer.Pieces)
+                bool validMove = false;
+
+                foreach (Piece opponentPiece in opponentPlayer.Pieces)
                 {
-                    if (ownPiece.IsMoveValid(opponentPiece.PosX, opponentPiece.PosY, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(opponentPiece.PosX, opponentPiece.PosY, ownPiece, currentPlayer, opponentPlayer))
+                    foreach (Piece ownPiece in currentPlayer.Pieces)
                     {
-                        validMove = true;
-                        opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs
-                        ownPiece.MovePiece(opponentPiece.PosX, opponentPiece.PosY); // Flyttar egen pjäs                  
-                        break;
+                        if (ownPiece.IsMoveValid(opponentPiece.PosX, opponentPiece.PosY, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(opponentPiece.PosX, opponentPiece.PosY, ownPiece, currentPlayer, opponentPlayer))
+                        {
+                            validMove = true;
+                            opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs
+                            ownPiece.MovePiece(opponentPiece.PosX, opponentPiece.PosY); // Flyttar egen pjäs                  
+                            break;
+                        }
                     }
+                    if (validMove) { break; }
                 }
-                if (validMove) { break; }    
+                if (!validMove) { RandomMove(currentPlayer, opponentPlayer); }
             }
-            if (!validMove) { RandomMove(currentPlayer, opponentPlayer); }
         }
         public void RandomMove(Player currentPlayer, Player opponentPlayer)
         {
@@ -72,14 +75,23 @@ namespace Lab2_0._2
             int kingPosX = king.PosX;
             int kingPosY = king.PosY;
 
-            if (king.IsMoveValid(kingPosX - 1, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX - 1, kingPosY - 0, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY - 0, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 0, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX - 1, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY + 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX - 0, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 0, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY - 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX - 0, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 0, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY + 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 1, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY - 0, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY - 0, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 0, king, opponentPlayer); return; }
-            else if (king.IsMoveValid(kingPosX + 1, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY + 1, king, opponentPlayer); return; }
+            int counter = 0;
+
+            while (counter < 1000)
+            {
+                Random random = new Random();
+                int move = random.Next(8);
+                counter++;
+
+                if (move == 0 && king.IsMoveValid(kingPosX - 1, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 1, king, opponentPlayer); return; }
+                if (move == 1 && king.IsMoveValid(kingPosX - 1, kingPosY - 0, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY - 0, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY - 0, king, opponentPlayer); return; }
+                if (move == 2 && king.IsMoveValid(kingPosX - 1, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 1, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 1, kingPosY + 1, king, opponentPlayer); return; }
+                if (move == 3 && king.IsMoveValid(kingPosX - 0, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 0, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY - 1, king, opponentPlayer); return; }
+                if (move == 4 && king.IsMoveValid(kingPosX - 0, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX - 0, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX - 0, kingPosY + 1, king, opponentPlayer); return; }
+                if (move == 5 && king.IsMoveValid(kingPosX + 1, kingPosY - 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY - 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 1, king, opponentPlayer); return; }
+                if (move == 6 && king.IsMoveValid(kingPosX + 1, kingPosY - 0, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY - 0, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY - 0, king, opponentPlayer); return; }
+                if (move == 7 && king.IsMoveValid(kingPosX + 1, kingPosY + 1, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(kingPosX + 1, kingPosY + 1, king, currentPlayer, opponentPlayer)) { BeatIfColide(kingPosX + 1, kingPosY + 1, king, opponentPlayer); return; }
+            }
 
             Console.WriteLine();
             Console.WriteLine("{0} is checkmate, {1} is the the winner", currentPlayer.Color, opponentPlayer.Color);
@@ -124,6 +136,30 @@ namespace Lab2_0._2
                 return false;
             }
 
+
+            
+        }
+
+        private bool MoveToThreatOpponentKing(Player currentPlayer, Player opponentPlayer)
+        {
+
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    foreach (Piece ownPiece in currentPlayer.Pieces)
+                    {
+                        if (ownPiece.IsMoveValid(x,y,currentPlayer,opponentPlayer) && !IsKingSafeAfterMove(x,y,ownPiece,opponentPlayer,currentPlayer) && IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer))
+                        {
+                            ownPiece.MovePiece(x, y);
+                            BeatIfColide(x, y, ownPiece, opponentPlayer);
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
 
             
         }
