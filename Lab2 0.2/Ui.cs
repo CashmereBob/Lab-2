@@ -10,6 +10,8 @@ namespace Lab2_0._2
     {
         public void PrintBoard(Board board)
         {
+            ConsoleColor[] colors = { ConsoleColor.White, ConsoleColor.Black };
+
             Console.Clear();
             Console.WriteLine();
             Console.WriteLine("        A     B     C     D     E     F     G     H");
@@ -23,7 +25,9 @@ namespace Lab2_0._2
 
                 for (int y = 0; y < 8; y++)
                 {
-                    
+                    Console.BackgroundColor = colors[(x + y) % 2];
+                    Console.ForegroundColor = colors[(x + y + 1) % 2];
+
                     if (board.GameBoard[x,y] == null)
                     {
                         Console.Write("     ");
@@ -38,6 +42,8 @@ namespace Lab2_0._2
                     string output = newType.ToString();
                     Console.Write(" " + output + " ");
                     }
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
                     Console.Write("|");
                 }
 
