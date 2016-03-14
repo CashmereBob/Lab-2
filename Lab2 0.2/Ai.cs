@@ -74,7 +74,7 @@ namespace Lab2_0._2
                     BeatIfColide(opponentPiece.PosX, opponentPiece.PosY, ownPiece, opponentPlayer);
                     return;
                 } 
-                else if (unSafeBeatMoves.Count() != 0)
+                if (unSafeBeatMoves.Count() != 0)
                 {
 
                     Dictionary<Piece, Piece> rankedMoves = new Dictionary<Piece, Piece>();
@@ -127,7 +127,7 @@ namespace Lab2_0._2
                         return;
                     }
                 }
-                else if (safeMoves.Count() != 0)
+                if (safeMoves.Count() != 0)
                 {
                     
                     while (true)
@@ -148,10 +148,10 @@ namespace Lab2_0._2
                         
                     }
                 }
-                else if (unSafeMoves.Count() != 0)
+                if (unSafeMoves.Count() != 0)
                 {
 
-                        foreach (KeyValuePair<int[], Piece> move in safeMoves)
+                        foreach (KeyValuePair<int[], Piece> move in unSafeMoves)
                         {
                             
                                 BeatIfColide(move.Key[0], move.Key[1], move.Value, opponentPlayer);
@@ -163,7 +163,7 @@ namespace Lab2_0._2
                     
                 }
 
-                for (int x = 0; x < 8; x++)
+                /*for (int x = 0; x < 8; x++)
                 {
                     for (int y = 0; y < 8; y++)
                     {
@@ -175,7 +175,7 @@ namespace Lab2_0._2
                             }
                         }
                     }
-                }
+                }*/
 
                 Console.WriteLine();
                 Console.WriteLine("{0} is checkmate, {1} is the the winner", currentPlayer.Color, opponentPlayer.Color);
