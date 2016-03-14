@@ -19,9 +19,9 @@ namespace Lab2_0._2
 
         public override bool IsMoveValid(int newPosX, int newPosY, Player currentPlayer, Player opponentPlayer)
         {
-            if (!(PosX == newPosX || PosY == newPosY)) return false;
             if (PosX == newPosX && PosY == newPosY) return false;
-
+            if (!(PosX == newPosX || PosY == newPosY)) return false;
+            
             int dx = Math.Max(-1, Math.Min(1, newPosX - PosX));
             int dy = Math.Max(-1, Math.Min(1, newPosY - PosY));
 
