@@ -10,6 +10,8 @@ namespace Lab2_0._2
     {
         public List<Piece> Pieces { get; private set; }
         public string Color { get; private set; }
+        public int row1 { get; private set; }
+        public int row2 { get; private set; }
 
         public Player(string color)
         {
@@ -21,8 +23,6 @@ namespace Lab2_0._2
         public void InitiatePieces()
         {
             //Baserat på färg bestämmer vilka rader pjäserna ska plaseras på
-            int row1 = -1;
-            int row2 = -1;
             if (Color == "white")
             {
                 row1 = 0;

@@ -15,6 +15,7 @@ namespace Lab2_0._2
         Ai _ai;
         Player _opponentPlayer;
         Player _currentPlayer;
+        public int GameCode = 0;
 
         public ChessGameEngine()
         {
@@ -52,6 +53,7 @@ namespace Lab2_0._2
                 _currentPlayer = _black;
             }
 
+            /*
             // Kontrollera så att kungen safe är true annars försök flytta, om flytta ej går vinner motståndaren.
             if (_currentPlayer.IsKingSafe(_currentPlayer, _opponentPlayer))
             {
@@ -68,9 +70,12 @@ namespace Lab2_0._2
 
                 UpdateGame();
                 
-            } 
+            } */
 
-            
+            _ai.CalculateBestMove(_currentPlayer, _opponentPlayer, GameCode);
+
+            UpdateGame();
+
 
         }
 

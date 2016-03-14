@@ -17,6 +17,7 @@ namespace Lab2_0._2
             this.PosY = posY;
             this.Color = color;
             this.Type = "knight";
+            this.Points = 3;
         }
         public override bool IsMoveValid(int newPosX, int newPosY, Player currentPlayer, Player opponentPlayer)
         {

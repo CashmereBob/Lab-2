@@ -15,15 +15,15 @@ namespace Lab2_0._2
 
             Console.ReadKey();
 
-            bool gameContinue = true;
+            
 
-            while (gameContinue)
+            while (game.GameCode == 0)
             {
                 game.Turn();
 
                 Console.WriteLine();
                 Console.WriteLine("     Press any key to initiate next turn");
-                Console.ReadKey();
+                
                
             }
         }
