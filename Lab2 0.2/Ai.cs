@@ -83,7 +83,7 @@ namespace Lab2_0._2
                     foreach (KeyValuePair<Piece, Piece> move in unSafeBeatMoves)
                     {
                         // om egen pjäs är värd mer än motståndarens.
-                        if (move.Key.Points > move.Value.Points)
+                        if (move.Key.Points <= move.Value.Points) //TODO, anpassa för mer action :D
                         {
                             // om egen pjäs redan är rankad
                             if (rankedMoves.ContainsKey(move.Key))
@@ -151,16 +151,34 @@ namespace Lab2_0._2
                 if (unSafeMoves.Count() != 0)
                 {
 
-                        foreach (KeyValuePair<int[], Piece> move in unSafeMoves)
+                    Piece ownPiece = null;
+                    int posX = -1;
+                    int posY = -1;
+
+                    foreach (KeyValuePair<int[], Piece> move in unSafeMoves)
+                    {
+                        if (ownPiece == null)
                         {
-                            
-                                BeatIfColide(move.Key[0], move.Key[1], move.Value, opponentPlayer);
-                                return;
-                            
+                            ownPiece = move.Value;
+                            posX = move.Key[0];
+                            posY = move.Key[1];
                         }
+                        else
+                        {
+                            if (ownPiece.Points > move.Value.Points)
+                            {
+                                ownPiece = move.Value;
+                                posX = move.Key[0];
+                                posY = move.Key[1];
+                            }
+                        }
+                    }
+
+                    BeatIfColide(posX, posY, ownPiece, opponentPlayer);
+                    return;
 
 
-                    
+
                 }
 
                 /*for (int x = 0; x < 8; x++)

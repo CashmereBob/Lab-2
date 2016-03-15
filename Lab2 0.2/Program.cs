@@ -23,6 +23,7 @@ namespace Lab2_0._2
 
                 Console.WriteLine();
                 Console.WriteLine("     Press any key to initiate next turn");
+                Console.ReadKey();
                 
                
             }
