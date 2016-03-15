@@ -83,7 +83,7 @@ namespace Lab2_0._2
                     foreach (KeyValuePair<Piece, Piece> move in unSafeBeatMoves)
                     {
                         // om egen pjäs är värd mer än motståndarens.
-                        if (move.Key.Points <= move.Value.Points) //TODO, anpassa för mer action :D
+                        if (move.Key.Points < move.Value.Points) //TODO, anpassa för mer action :D
                         {
                             // om egen pjäs redan är rankad
                             if (rankedMoves.ContainsKey(move.Key))
@@ -278,18 +278,19 @@ namespace Lab2_0._2
     
         private void BeatIfColide(int posX, int posY, Piece ownPiece, Player opponentPlayer )
         {
-            // Om tvångsflyttat pjäs (kung) koliderar med motståndare slås denna ut.
+
+            // Om flyttad pjäs koliderar med motståndare slås denna ut.
 
             foreach (Piece opponentPiece in opponentPlayer.Pieces)
             {
                 if (opponentPiece.PosX == posX && opponentPiece.PosY == posY)
                 {
-                    opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs
+                    opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs 
                     break;
                 }
             }
 
-            ownPiece.MovePiece(posX, posY);// Flyttar egen pjäs  
+            ownPiece.MovePiece(posX, posY);// Flyttar egen pjäs 
 
         }
 
@@ -328,8 +329,9 @@ namespace Lab2_0._2
                     {
                         if (ownPiece.IsMoveValid(x,y,currentPlayer,opponentPlayer) && !IsKingSafeAfterMove(x,y,ownPiece,opponentPlayer,currentPlayer) && IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer) && !IsSquareThreaten(x,y,currentPlayer,opponentPlayer))
                         {
-                            ownPiece.MovePiece(x, y);
+                            
                             BeatIfColide(x, y, ownPiece, opponentPlayer);
+                            
                             return true;
                         }
                     }

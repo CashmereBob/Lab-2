@@ -10,7 +10,7 @@ namespace Lab2_0._2
     {
         public void PrintBoard(Board board)
         {
-            ConsoleColor[] colors = { ConsoleColor.White, ConsoleColor.Black };
+            ConsoleColor[] colors = { ConsoleColor.Gray, ConsoleColor.Black };
 
             Console.Clear();
             Console.WriteLine();

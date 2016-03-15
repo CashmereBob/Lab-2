@@ -21,9 +21,11 @@ namespace Lab2_0._2
         }
         public void MovePiece(int newPosX, int newPosY)
         {
+            
             // sätter de nya kordinaterna efter flytt
             PosX = newPosX;
-            PosY = newPosY;  
+            PosY = newPosY;
+            
         }
         public virtual bool IsMoveValid(int newPosX, int newPosY, Player currentPlayer, Player opponentPlayer)
         { return false; }
