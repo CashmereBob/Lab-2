@@ -6,23 +6,23 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    
-    class Ui
+
+    public class Ui 
     {
-        private string _latestMove { get; set; }
+        public string _latestMove { get; set; }
         private int _moveCounter = 1;
 
         public void PrintBoard(Board board)
         {
             ConsoleColor[] colors = { ConsoleColor.Gray, ConsoleColor.Black };
 
-            Console.Clear();
+            
             Console.WriteLine();
             Console.WriteLine("        A     B     C     D     E     F     G     H");
             Console.WriteLine("     -------------------------------------------------");
             for (int x = 0; x < 8; x++)
             {
-                Console.Write("  ");
+                Console.Write("  "); 
                 Console.Write(x + 1);
                 Console.Write("  ");
                 Console.Write("|");
@@ -62,7 +62,7 @@ namespace Lab2_0._2
         public void LoggLatestMove(int oldPosX, int oldPosY, int newPosX, int newPosY, Piece ownPiece)
         {
             string column = "ABCDEFGH";
-            _latestMove = string.Format($"     #{_moveCounter}. {ownPiece.Color} {ownPiece.Type} from {column[oldPosY]}{oldPosX+1} to {column[newPosY]}{newPosX + 1}");
+            _latestMove = string.Format($"#{_moveCounter}. {ownPiece.Color} {ownPiece.Type} from {column[oldPosY]}{oldPosX+1} to {column[newPosY]}{newPosX + 1}");
             _moveCounter++;
         }
 
@@ -77,7 +77,7 @@ namespace Lab2_0._2
 
         public void LoggCheckMate(Player currentPlayer)
         {
-            _latestMove += string.Format($"\nCHECKMATE, GAME OVER!");
+            _latestMove += string.Format($" *CHECKMATE, GAME OVER!");
         }
 
         public void LoggDraw()

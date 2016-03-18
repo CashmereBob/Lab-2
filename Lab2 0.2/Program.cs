@@ -6,23 +6,24 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    class Program
+    public class Program
     {
         
         static void Main(string[] args)
         {
             var game = new ChessGameEngine();
 
-            Console.ReadKey();
-
             
 
             while (true)
             {
+                
                 game.Turn();
-
+                Console.Clear();
+                // Skriver ut spelbrädet
+                game._ui.PrintBoard(game._gameboard);
                 Console.WriteLine();
-                Console.WriteLine("     Press any key to initiate next turn");
+                Console.WriteLine("Press any key to initiate next turn");
                 Console.ReadKey();
                 
                

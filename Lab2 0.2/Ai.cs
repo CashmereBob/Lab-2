@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    class Ai
+    public class Ai
     {
         Ui _ui = null;
         public int _roundsWithoutPawnMove = 0;

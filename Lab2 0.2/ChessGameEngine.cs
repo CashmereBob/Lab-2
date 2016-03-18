@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    class ChessGameEngine
+    public class ChessGameEngine
     {
-        Board _gameboard;
-        Player _white;
-        Player _black;
-        Ui _ui;
-        Ai _ai;
-        Player _opponentPlayer;
-        Player _currentPlayer;
+        public Board _gameboard;
+        public Player _white;
+        public Player _black;
+        public Ui _ui;
+        public Ai _ai;
+        public Player _opponentPlayer;
+        public Player _currentPlayer;
        
 
         public ChessGameEngine()
@@ -33,10 +33,6 @@ namespace Lab2_0._2
         {
             // Uppdaterar brädet med det nya draget
             _gameboard.UppdatePlayerPiecesOnBoard(_currentPlayer, _opponentPlayer);
-
-            // Skriver ut spelbrädet
-            _ui.PrintBoard(_gameboard);
-
             // Sätter nuvarande spelare som sist spelande runda.
             _opponentPlayer = _currentPlayer;
         }

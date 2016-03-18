@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    abstract class Piece
+    public abstract class Piece
     {
         public int PosX { get; protected set; }
         public int PosY { get; protected set; }

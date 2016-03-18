@@ -122,6 +122,8 @@
             this.label20 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.notValid = new System.Windows.Forms.Label();
+            this.saveLogg = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -1427,7 +1429,7 @@
             this.textBoxMoves.Name = "textBoxMoves";
             this.textBoxMoves.ReadOnly = true;
             this.textBoxMoves.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxMoves.Size = new System.Drawing.Size(477, 272);
+            this.textBoxMoves.Size = new System.Drawing.Size(560, 272);
             this.textBoxMoves.TabIndex = 17;
             // 
             // player
@@ -1545,11 +1547,33 @@
             this.notValid.TabIndex = 31;
             this.notValid.Text = "That is not a valid move!";
             // 
+            // saveLogg
+            // 
+            this.saveLogg.Location = new System.Drawing.Point(1104, 347);
+            this.saveLogg.Name = "saveLogg";
+            this.saveLogg.Size = new System.Drawing.Size(115, 29);
+            this.saveLogg.TabIndex = 32;
+            this.saveLogg.Text = "Save logg...";
+            this.saveLogg.UseVisualStyleBackColor = true;
+            this.saveLogg.Click += new System.EventHandler(this.saveLogg_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(659, 347);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(115, 29);
+            this.button2.TabIndex = 33;
+            this.button2.Text = "New Game";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1165, 669);
+            this.ClientSize = new System.Drawing.Size(1253, 669);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.saveLogg);
             this.Controls.Add(this.notValid);
             this.Controls.Add(this.label21);
             this.Controls.Add(this.label20);
@@ -1687,6 +1711,8 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label notValid;
+        private System.Windows.Forms.Button saveLogg;
+        private System.Windows.Forms.Button button2;
     }
 }
 

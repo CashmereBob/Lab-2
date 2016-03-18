@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Lab2_0._2;
+using System.Runtime.InteropServices;
 
 namespace WindowsForm_Chess
 {
     public partial class Form1 : Form
     {
-        ChessGameEngine game = new ChessGameEngine();
+        ChessGameEngine game = null;
+
+
 
         string playerColor = "White is playing";
 
@@ -24,8 +29,10 @@ namespace WindowsForm_Chess
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            game = new ChessGameEngine();
             UpdateBoard();
         }
+     
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
@@ -156,6 +163,29 @@ namespace WindowsForm_Chess
         private void LoggLatest()
         {
             textBoxMoves.AppendText(game._ui._latestMove + Environment.NewLine);
+        }
+
+        private void saveLogg_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog savefile = new SaveFileDialog();
+            
+            savefile.FileName = "Chesslogg.txt";
+            
+            savefile.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+
+            if (savefile.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter sw = new StreamWriter(savefile.FileName))
+                    sw.WriteLine(textBoxMoves.Text);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            game = new ChessGameEngine();
+            playerColor = "White is playing";
+            textBoxMoves.Text = "";
+            UpdateBoard();
         }
     }
 }

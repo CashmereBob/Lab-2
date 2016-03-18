@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    class Bishop : Piece
+    public class Bishop : Piece
     {
         public Bishop(int posX, int posY, string color) : base(posX, posY, color)
         {

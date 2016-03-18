@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    class Pawn : Piece
+    public class Pawn : Piece
     {
         public Pawn(int posX, int posY, string color) : base (posX, posY, color)
         {

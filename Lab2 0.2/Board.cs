@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
-    class Board
+    public class Board
     {
         public Piece[,] GameBoard { get; private set; }
 
