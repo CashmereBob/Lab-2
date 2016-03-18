@@ -8,7 +8,14 @@ namespace Lab2_0._2
 {
     class Ai
     {
-        public void CalculateBestMove(Player currentPlayer, Player opponentPlayer, int gameCode)
+        Ui _ui = null;
+        public int _roundsWithoutPawnMove = 0;
+
+        public Ai(Ui ui)
+        {
+            _ui = ui;
+        }
+        public void CalculateBestMove(Player currentPlayer, Player opponentPlayer)
         {
             /* Loopar igenom motståndarens pjäser för att se om någon av dessa går att slå av egna pjäser
             genom att för varje motståndar pjäs kontrollera om dess kordinater är ett valid move av egna pjäser.
@@ -129,8 +136,8 @@ namespace Lab2_0._2
                 }
                 if (safeMoves.Count() != 0)
                 {
-                    
-                    while (true)
+     
+                        while (true)
                     {                       
                         Random random = new Random();
                         int posX = random.Next(8);
@@ -181,24 +188,11 @@ namespace Lab2_0._2
 
                 }
 
-                /*for (int x = 0; x < 8; x++)
-                {
-                    for (int y = 0; y < 8; y++)
-                    {
-                        foreach (Piece ownPiece in currentPlayer.Pieces)
-                        {
-                            if(ownPiece.IsMoveValid(x,y,currentPlayer,opponentPlayer) && IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer)){
-                                BeatIfColide(x, y, ownPiece, opponentPlayer);
-                                return;
-                            }
-                        }
-                    }
-                }*/
-
-                Console.WriteLine();
-                Console.WriteLine("{0} is checkmate, {1} is the the winner", currentPlayer.Color, opponentPlayer.Color);
-                gameCode = 1;
-                Console.ReadKey();
+                _ui.LoggCheckMate(currentPlayer);
+                //Console.WriteLine();
+                //Console.WriteLine("{0} is checkmate, {1} is the the winner", currentPlayer.Color, opponentPlayer.Color);
+                
+                //Console.ReadKey();
             }
 
 
@@ -281,16 +275,28 @@ namespace Lab2_0._2
 
             // Om flyttad pjäs koliderar med motståndare slås denna ut.
 
+            Piece beatenPiece = null;
             foreach (Piece opponentPiece in opponentPlayer.Pieces)
             {
                 if (opponentPiece.PosX == posX && opponentPiece.PosY == posY)
                 {
                     opponentPlayer.RemoveBeatenPiece(opponentPiece, ownPiece); // slår ut motståndarens pjäs 
+                    beatenPiece = opponentPiece;
                     break;
                 }
             }
 
-            ownPiece.MovePiece(posX, posY);// Flyttar egen pjäs 
+            _ui.LoggLatestMove(ownPiece.PosX, ownPiece.PosY, posX, posY, ownPiece);
+            if (beatenPiece != null)
+            {
+                _ui.LoggBeat(beatenPiece);
+            } else
+            {
+                CalculatePawnMoves(ownPiece);
+            }
+
+            ownPiece.MovePiece(posX, posY); // Flyttar egen pjäs 
+           
 
         }
 
@@ -331,7 +337,7 @@ namespace Lab2_0._2
                         {
                             
                             BeatIfColide(x, y, ownPiece, opponentPlayer);
-                            
+                            _ui.LoggCheck();
                             return true;
                         }
                     }
@@ -365,6 +371,18 @@ namespace Lab2_0._2
             }
 
             return false;
+        }
+
+        public void CalculatePawnMoves(Piece movedPiece)
+        {
+            if (movedPiece.Type == "pawn")
+            {
+                _roundsWithoutPawnMove = 0;
+            }
+            else 
+            {
+                _roundsWithoutPawnMove++;
+            }
         }
 
     }

@@ -17,7 +17,7 @@ namespace Lab2_0._2
 
             
 
-            while (game.GameCode == 0)
+            while (true)
             {
                 game.Turn();
 

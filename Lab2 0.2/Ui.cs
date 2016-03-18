@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Lab2_0._2
 {
+    
     class Ui
     {
+        private string _latestMove { get; set; }
+        private int _moveCounter = 1;
+
         public void PrintBoard(Board board)
         {
             ConsoleColor[] colors = { ConsoleColor.Gray, ConsoleColor.Black };
@@ -50,8 +54,35 @@ namespace Lab2_0._2
                 Console.Write("\n");
                 Console.Write("     -------------------------------------------------");
                 Console.Write("\n");
+                
             }
+            Console.WriteLine(_latestMove);
+        }
 
+        public void LoggLatestMove(int oldPosX, int oldPosY, int newPosX, int newPosY, Piece ownPiece)
+        {
+            string column = "ABCDEFGH";
+            _latestMove = string.Format($"     #{_moveCounter}. {ownPiece.Color} {ownPiece.Type} from {column[oldPosY]}{oldPosX+1} to {column[newPosY]}{newPosX + 1}");
+            _moveCounter++;
+        }
+
+        public void LoggBeat(Piece beatenPiece)
+        {
+            _latestMove += string.Format($" beats {beatenPiece.Color} {beatenPiece.Type}");
+        }
+        public void LoggCheck()
+        {
+            _latestMove += string.Format($" CHECK!");
+        }
+
+        public void LoggCheckMate(Player currentPlayer)
+        {
+            _latestMove += string.Format($"\nCHECKMATE, GAME OVER!");
+        }
+
+        public void LoggDraw()
+        {
+            Console.WriteLine($"No pawn moves or beats for 50 rounds.\nDRAW, GAME OVER!");
         }
     }
 }

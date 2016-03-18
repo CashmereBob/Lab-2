@@ -61,10 +61,10 @@ namespace Lab2_0._2
         public void RemoveBeatenPiece(Piece beatenPiece, Piece winningPiece)
         {
 
-            Console.WriteLine();
-            Console.WriteLine("     {4} {5} from {7}-{6} ** BEATS ** {0} {1} on {3}-{2}", beatenPiece.Color, beatenPiece.Type, beatenPiece.PosX + 1, IntToChar(beatenPiece.PosY), winningPiece.Color, winningPiece.Type, winningPiece.PosX + 1, IntToChar(winningPiece.PosY));
+            //Console.WriteLine();
+            //Console.WriteLine("     {4} {5} from {7}-{6} ** BEATS ** {0} {1} on {3}-{2}", beatenPiece.Color, beatenPiece.Type, beatenPiece.PosX + 1, IntToChar(beatenPiece.PosY), winningPiece.Color, winningPiece.Type, winningPiece.PosX + 1, IntToChar(winningPiece.PosY));
             Pieces.Remove(beatenPiece);
-            Console.ReadKey();
+            //Console.ReadKey();
         }
 
         public bool IsKingSafe(Player currentPlayer, Player opponentPlayer)
