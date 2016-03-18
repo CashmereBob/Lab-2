@@ -270,7 +270,7 @@ namespace Lab2_0._2
 
         }
     
-        private void BeatIfColide(int posX, int posY, Piece ownPiece, Player opponentPlayer )
+        public void BeatIfColide(int posX, int posY, Piece ownPiece, Player opponentPlayer )
         {
 
             // Om flyttad pjäs koliderar med motståndare slås denna ut.
@@ -300,7 +300,7 @@ namespace Lab2_0._2
 
         }
 
-        private bool IsKingSafeAfterMove(int newPosX, int newPosY, Piece ownPiece, Player currentPlayer, Player opponentPlayer)
+        public bool IsKingSafeAfterMove(int newPosX, int newPosY, Piece ownPiece, Player currentPlayer, Player opponentPlayer)
         {
             // kontrollerar så att kungen är safe efter att pjäsen flyttats innan en flytt görs.
 

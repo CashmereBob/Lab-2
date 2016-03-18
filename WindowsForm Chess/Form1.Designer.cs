@@ -1463,6 +1463,7 @@
             this.move.TabIndex = 21;
             this.move.Text = "Move!";
             this.move.UseVisualStyleBackColor = true;
+            this.move.Click += new System.EventHandler(this.move_Click);
             // 
             // to1
             // 
@@ -1543,9 +1544,8 @@
             this.notValid.AutoSize = true;
             this.notValid.Location = new System.Drawing.Point(659, 500);
             this.notValid.Name = "notValid";
-            this.notValid.Size = new System.Drawing.Size(161, 17);
+            this.notValid.Size = new System.Drawing.Size(0, 17);
             this.notValid.TabIndex = 31;
-            this.notValid.Text = "That is not a valid move!";
             // 
             // saveLogg
             // 

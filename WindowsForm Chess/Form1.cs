@@ -44,16 +44,15 @@ namespace WindowsForm_Chess
             game.Turn();
             UpdateBoard();
             LoggLatest();
+            if (playerColor == "White is playing")
+            { playerColor = "Black is playing"; }
+            else
+            { playerColor = "White is playing"; }
         }
 
         private void UpdateBoard()
         {
             player.Text = playerColor;
-
-            if ( playerColor == "White is playing")
-            { playerColor = "Black is playing"; }
-            else
-            { playerColor = "White is playing"; }
 
             Piece[,] gameboard = game._gameboard.GameBoard;
 
@@ -187,5 +186,11 @@ namespace WindowsForm_Chess
             textBoxMoves.Text = "";
             UpdateBoard();
         }
+
+        private void move_Click(object sender, EventArgs e)
+        {
+            notValid.Text = "Funktion not implemeted.";
+        }
+
     }
 }
