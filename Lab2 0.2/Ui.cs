@@ -82,7 +82,7 @@ namespace Lab2_0._2
 
         public void LoggDraw()
         {
-            Console.WriteLine($"No pawn moves or beats for 50 rounds.\nDRAW, GAME OVER!");
+            _latestMove = "No pawn moves or beats for 50 rounds. DRAW, GAME OVER!";
         }
     }
 }
