@@ -8,7 +8,8 @@ namespace Lab2_0._2
 {
     public class Board
     {
-        public Piece[,] GameBoard { get; private set; }
+        //public Piece[,] GameBoard { get; private set; } TODO???
+        public Piece[,] GameBoard { get; set; }
 
         public Board()
         {

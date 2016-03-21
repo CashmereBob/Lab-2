@@ -194,9 +194,8 @@ namespace Lab2_0._2
                 
                 //Console.ReadKey();
             }
+        }
 
-
-            }
         private void AddMovesToLists(Dictionary<int[], Piece> safeMoves, Dictionary<int[], Piece> unSafeMoves, Dictionary<Piece, Piece> safeBeatMoves, Dictionary<Piece, Piece> unSafeBeatMoves, Player currentPlayer, Player opponentPlayer)
         { 
             // Lägger in säkra moves och osäkra moves i vars en dict 
@@ -206,6 +205,23 @@ namespace Lab2_0._2
                 {
                     for (int y = 0; y < 8; y++)
                     {
+                        bool tmpIsMoveValid = ownPiece.IsMoveValid(x, y, currentPlayer, opponentPlayer);
+                        bool tmpIsKingSafeAfterMove = IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer);
+
+                        //Safe moves
+                        if (tmpIsMoveValid && tmpIsKingSafeAfterMove && !IsSquareThreaten(x, y, currentPlayer, opponentPlayer))
+                        {
+                            safeMoves.Add(new int[] { x, y }, ownPiece);
+                        }
+
+                        //Unsafe moves
+                        else if (tmpIsMoveValid && tmpIsKingSafeAfterMove)
+                        {
+                            unSafeMoves.Add(new int[] { x, y }, ownPiece);
+                        }
+
+                        /* 
+                        //OBS! Dyra operationer ska brytas ut    
                         //Safe moves
                         if (ownPiece.IsMoveValid(x, y, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer) && !IsSquareThreaten(x, y, currentPlayer,opponentPlayer))
                         {
@@ -216,7 +232,7 @@ namespace Lab2_0._2
                         else if (ownPiece.IsMoveValid(x, y, currentPlayer, opponentPlayer) && IsKingSafeAfterMove(x, y, ownPiece, currentPlayer, opponentPlayer))
                         {
                             unSafeMoves.Add(new int[] { x, y }, ownPiece);
-                        }
+                        }*/
                     }
                 }
             }
@@ -290,14 +306,13 @@ namespace Lab2_0._2
             if (beatenPiece != null)
             {
                 _ui.LoggBeat(beatenPiece);
-            } else
+            }
+            else
             {
                 CalculatePawnMoves(ownPiece);
             }
 
             ownPiece.MovePiece(posX, posY); // Flyttar egen pjäs 
-           
-
         }
 
         public bool IsKingSafeAfterMove(int newPosX, int newPosY, Piece ownPiece, Player currentPlayer, Player opponentPlayer)
@@ -318,10 +333,7 @@ namespace Lab2_0._2
             {
                 ownPiece.MovePiece(oldPosX, oldPosY);
                 return false;
-            }
-
-
-            
+            }            
         }
 
         private bool MoveToThreatOpponentKing(Player currentPlayer, Player opponentPlayer)
@@ -358,13 +370,18 @@ namespace Lab2_0._2
 
             foreach (Piece piece in opponentPlayer.Pieces)
             {
-
-                if (piece.Type == "pawn")
+                if(piece is Pawn)
                 {
+                    return ((Pawn) piece).IsThreatened(piece, PosX, PosY);
+
+                    /* 
+                    if (piece.Type == "pawn")
+                    {
+                    //Flyttad till Pawn
                     if (piece.PosX == PosX - 1 && piece.PosY == PosY - 1) { return true; }
                     if (piece.PosX == PosX - 1 && piece.PosY == PosY + 1) { return true; }
                     if (piece.PosX == PosX + 1 && piece.PosY == PosY + 1) { return true; }
-                    if (piece.PosX == PosX + 1 && piece.PosY == PosY - 1) { return true; }
+                    if (piece.PosX == PosX + 1 && piece.PosY == PosY - 1) { return true; }*/
                 }
                 else if (piece.IsMoveValid(PosX, PosY, opponentPlayer, currentPlayer)) { return true; }
 
@@ -375,7 +392,8 @@ namespace Lab2_0._2
 
         public void CalculatePawnMoves(Piece movedPiece)
         {
-            if (movedPiece.Type == "pawn")
+            // K : if (movedPiece.Type == "pawn") 
+             if (movedPiece is Pawn)
             {
                 _roundsWithoutPawnMove = 0;
             }

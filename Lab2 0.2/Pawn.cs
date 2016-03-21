@@ -21,10 +21,10 @@ namespace Lab2_0._2
         {
             // Sätter värden för start rad och riktning av steg eftersom pawns bara får gå åt ett håll
 
-            int startingRow = -10;
-            int endRow = -10;
-            int oneStep = -10;
-            int twoStep = -10;
+            int startingRow;
+            int endRow;
+            int oneStep;
+            int twoStep;
 
             if (Color == "white")
             {
@@ -34,7 +34,7 @@ namespace Lab2_0._2
                 twoStep = 2;
  
             }
-            else if (Color == "black")
+            else // black
             {
                 startingRow = 6;
                 endRow = 0;
@@ -47,9 +47,20 @@ namespace Lab2_0._2
             // Kontrollerar om pawn står på första raden, har då möjlighet att flytta 1 eller 2 steg.
             if (PosX == startingRow && PosY == newPosY)
             {
-                if (newPosX == PosX + oneStep && IsSquereClear(PosX + oneStep, PosY, currentPlayer) && IsSquereClear(PosX + oneStep, PosY, opponentPlayer)) { return true; }
-                if (newPosX == PosX + twoStep && IsSquereClear(PosX + twoStep, PosY, currentPlayer) && IsSquereClear(PosX + twoStep, PosY, opponentPlayer)) { return true; }
+                bool tmpIsSquareClear = IsSquereClear(PosX + oneStep, PosY, currentPlayer) && IsSquereClear(PosX + oneStep, PosY, opponentPlayer);
+                if (newPosX == PosX + oneStep && tmpIsSquareClear) { return true; }
+                if (newPosX == PosX + twoStep && tmpIsSquareClear && IsSquereClear(PosX + twoStep, PosY, currentPlayer) && IsSquereClear(PosX + twoStep, PosY, opponentPlayer)) { return true; }
             }
+
+            /*// Kontrollerar om pawn står på första raden, har då möjlighet att flytta 1 eller 2 steg.
+            //OBS! Du vände på x och y:s betydelse; x står ju för kolumn normalt och y för raden
+            //Som tur är de andra pjäserna är symmetriska som de inte kommer att påverkas men försiktigt nästa gång med detta 
+            if (PosX == startingRow && PosY == newPosY)
+            {
+                if (newPosX == PosX + oneStep && IsSquereClear(PosX + oneStep, PosY, currentPlayer) && IsSquereClear(PosX + oneStep, PosY, opponentPlayer)) { return true; }
+                //BUGG - Bonden kan hoppa över till tvåsteg även om det står ngt vid första. Det kollas inte.
+                if (newPosX == PosX + twoStep && IsSquereClear(PosX + twoStep, PosY, currentPlayer) && IsSquereClear(PosX + twoStep, PosY, opponentPlayer)) { return true; }
+            }*/
 
             // Kontrollerar så att pawn inte står på sista raden.
             if (PosX != endRow)
@@ -59,8 +70,18 @@ namespace Lab2_0._2
 
                 // Kontrollerar om pawn har motståndare snett framför sig är detta steget accepterat.
                 if (PosY < 7 && newPosX == PosX + oneStep && newPosY == PosY + 1 && IsSquereClear(PosX + oneStep, PosY + 1, currentPlayer) && !IsSquereClear(PosX + oneStep, PosY + 1, opponentPlayer)) { return true; }
-                if (PosY > 0 && newPosX == PosX + oneStep && newPosY == PosY - 1 && IsSquereClear(PosX + oneStep, PosY - 1, currentPlayer) && !IsSquereClear(PosX + oneStep, PosY + 1, opponentPlayer)) { return true; }
+                if (PosY > 0 && newPosX == PosX + oneStep && newPosY == PosY - 1 && IsSquereClear(PosX + oneStep, PosY - 1, currentPlayer) && !IsSquereClear(PosX + oneStep, PosY - 1, opponentPlayer)) { return true; }
             }
+
+            return false;
+        }
+
+        public bool IsThreatened(Piece piece, int PosX, int PosY)
+        {
+            if (piece.PosX == PosX - 1 && piece.PosY == PosY - 1) { return true; }
+            if (piece.PosX == PosX - 1 && piece.PosY == PosY + 1) { return true; }
+            if (piece.PosX == PosX + 1 && piece.PosY == PosY + 1) { return true; }
+            if (piece.PosX == PosX + 1 && piece.PosY == PosY - 1) { return true; }
 
             return false;
         }

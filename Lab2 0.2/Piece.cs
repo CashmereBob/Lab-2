@@ -27,8 +27,10 @@ namespace Lab2_0._2
             PosY = newPosY;
             
         }
+
         public virtual bool IsMoveValid(int newPosX, int newPosY, Player currentPlayer, Player opponentPlayer)
         { return false; }
+
         public virtual bool IsSquereClear(int newPosX, int newPosY, Player player)
         {
             /* Kontrollerar listan spelarens lista med pjäser, om den nya positionen matchar en position 
@@ -43,7 +45,5 @@ namespace Lab2_0._2
 
             return true;
         }
-     
-
     }
 }
