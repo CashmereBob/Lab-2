@@ -15,16 +15,51 @@ namespace WindowsForm_Chess
 {
     public partial class Form1 : Form
     {
+        
+        private System.Windows.Forms.Label[,] Cell;
+        private Color firstClickUnselectedColor = Color.Aqua; 
+        private int? selectedX = null, selectedY = null;
+
         ChessGameEngine game = null;
 
-
-
-        string playerColor = "White is playing";
 
         public Form1()
         {
             InitializeComponent();
-            
+
+            // Cell's properties and event settings
+            this.Cell = new Label[8, 8];
+
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    this.Cell[x, y] = new Label();
+                    this.Cell[x, y].Anchor = ((AnchorStyles)((((AnchorStyles.Top | AnchorStyles.Bottom) | AnchorStyles.Left) | AnchorStyles.Right)));
+                    this.Cell[x, y].AutoSize = true;
+                    this.Cell[x, y].Font = new Font("Arial Unicode MS", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0)));
+                    this.Cell[x, y].Location = new Point(59 + 51 * y, 56 + 51 * x);
+                    this.Cell[x, y].Margin = new Padding(0);
+                    this.Cell[x, y].MaximumSize = new Size(51, 51);
+                    this.Cell[x, y].MinimumSize = new Size(51, 51);
+                    this.Cell[x, y].Name = "Cell";
+                    this.Cell[x, y].Size = new Size(51, 51);
+                    this.Cell[x, y].TabIndex = 1;
+                    this.Cell[x, y].TextAlign = ContentAlignment.MiddleCenter;
+                    this.Cell[x, y].BackColor = ((x + y) & 1) == 0 ? Color.Gainsboro : Color.Green;
+                    this.Cell[x, y].Click += new EventHandler(this.cell_Click);
+                }
+            }
+
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    this.Controls.Add(this.Cell[x, y]);
+                }
+            }
+
+            player.Text = "White is playing"; //Label
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,99 +69,30 @@ namespace WindowsForm_Chess
         }
      
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
+        /*private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
 
-        }
+        }*/
 
         private void AiMove_Click(object sender, EventArgs e)
         {
             game.Turn();
             UpdateBoard();
             LoggLatest();
-            if (playerColor == "White is playing")
-            { playerColor = "Black is playing"; }
-            else
-            { playerColor = "White is playing"; }
+            player.Text = game._currentPlayer == game._black ? "Black is playing" : "White is playing";
         }
 
         private void UpdateBoard()
         {
-            player.Text = playerColor;
-
             Piece[,] gameboard = game._gameboard.GameBoard;
 
-            UpdateLable(label1A, gameboard[0, 0]);
-            UpdateLable(label1B, gameboard[0, 1]);
-            UpdateLable(label1C, gameboard[0, 2]);
-            UpdateLable(label1D, gameboard[0, 3]);
-            UpdateLable(label1E, gameboard[0, 4]);
-            UpdateLable(label1F, gameboard[0, 5]);
-            UpdateLable(label1G, gameboard[0, 6]);
-            UpdateLable(label1H, gameboard[0, 7]);
-
-            UpdateLable(label2A, gameboard[1, 0]);
-            UpdateLable(label2B, gameboard[1, 1]);
-            UpdateLable(label2C, gameboard[1, 2]);
-            UpdateLable(label2D, gameboard[1, 3]);
-            UpdateLable(label2E, gameboard[1, 4]);
-            UpdateLable(label2F, gameboard[1, 5]);
-            UpdateLable(label2G, gameboard[1, 6]);
-            UpdateLable(label2H, gameboard[1, 7]);
-
-            UpdateLable(label3A, gameboard[2, 0]);
-            UpdateLable(label3B, gameboard[2, 1]);
-            UpdateLable(label3C, gameboard[2, 2]);
-            UpdateLable(label3D, gameboard[2, 3]);
-            UpdateLable(label3E, gameboard[2, 4]);
-            UpdateLable(label3F, gameboard[2, 5]);
-            UpdateLable(label3G, gameboard[2, 6]);
-            UpdateLable(label3H, gameboard[2, 7]);
-
-            UpdateLable(label4A, gameboard[3, 0]);
-            UpdateLable(label4B, gameboard[3, 1]);
-            UpdateLable(label4C, gameboard[3, 2]);
-            UpdateLable(label4D, gameboard[3, 3]);
-            UpdateLable(label4E, gameboard[3, 4]);
-            UpdateLable(label4F, gameboard[3, 5]);
-            UpdateLable(label4G, gameboard[3, 6]);
-            UpdateLable(label4H, gameboard[3, 7]);
-
-            UpdateLable(label5A, gameboard[4, 0]);
-            UpdateLable(label5B, gameboard[4, 1]);
-            UpdateLable(label5C, gameboard[4, 2]);
-            UpdateLable(label5D, gameboard[4, 3]);
-            UpdateLable(label5E, gameboard[4, 4]);
-            UpdateLable(label5F, gameboard[4, 5]);
-            UpdateLable(label5G, gameboard[4, 6]);
-            UpdateLable(label5H, gameboard[4, 7]);
-
-            UpdateLable(label6A, gameboard[5, 0]);
-            UpdateLable(label6B, gameboard[5, 1]);
-            UpdateLable(label6C, gameboard[5, 2]);
-            UpdateLable(label6D, gameboard[5, 3]);
-            UpdateLable(label6E, gameboard[5, 4]);
-            UpdateLable(label6F, gameboard[5, 5]);
-            UpdateLable(label6G, gameboard[5, 6]);
-            UpdateLable(label6H, gameboard[5, 7]);
-
-            UpdateLable(label7A, gameboard[6, 0]);
-            UpdateLable(label7B, gameboard[6, 1]);
-            UpdateLable(label7C, gameboard[6, 2]);
-            UpdateLable(label7D, gameboard[6, 3]);
-            UpdateLable(label7E, gameboard[6, 4]);
-            UpdateLable(label7F, gameboard[6, 5]);
-            UpdateLable(label7G, gameboard[6, 6]);
-            UpdateLable(label7H, gameboard[6, 7]);
-
-            UpdateLable(label8A, gameboard[7, 0]);
-            UpdateLable(label8B, gameboard[7, 1]);
-            UpdateLable(label8C, gameboard[7, 2]);
-            UpdateLable(label8D, gameboard[7, 3]);
-            UpdateLable(label8E, gameboard[7, 4]);
-            UpdateLable(label8F, gameboard[7, 5]);
-            UpdateLable(label8G, gameboard[7, 6]);
-            UpdateLable(label8H, gameboard[7, 7]);
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    UpdateLable(Cell[x, y], gameboard[x, y]);
+                }
+            }
 
         }
 
@@ -182,14 +148,64 @@ namespace WindowsForm_Chess
         private void button2_Click(object sender, EventArgs e)
         {
             game = new ChessGameEngine();
-            playerColor = "White is playing";
+            player.Text = "White is playing";
             textBoxMoves.Text = "";
             UpdateBoard();
         }
 
-        private void move_Click(object sender, EventArgs e)
+        private void cell_Click(object sender, EventArgs e)
         {
-            notValid.Text = "Funktion not implemeted.";
+            Color selectedColor = Color.Gray;
+            labelMessage.Text = "";
+            bool firstClick = selectedX == null && selectedY == null;
+            //Color firstClickUnselectedColor = selectedColor; 
+            //int? selectedX = null, selectedY = null; 
+
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    if (sender == Cell[x, y])
+                    {
+                        if (firstClick)
+                        {
+                            if (!game.IsCellEmpty(x, y) && game.IsCurrentPlayer(x, y))
+                            {
+                                firstClickUnselectedColor = this.Cell[x, y].BackColor;
+                                this.Cell[x, y].BackColor = selectedColor;
+                                selectedX = x;
+                                selectedY = y;
+                                labelMessage.Text = "";
+                            }
+                            else 
+                            {
+                                labelMessage.Text = "Empty or Not a valid piece to move.";
+                            }
+                        }
+                        else
+                        {
+                            if (game.IsValidMove((int)selectedX, (int)selectedY, x, y))
+                            {
+                                game.Move((int)selectedX, (int)selectedY, x, y);
+                                UpdateBoard();
+                                LoggLatest();
+                                this.Cell[(int)selectedX, (int)selectedY].BackColor = firstClickUnselectedColor;
+                                selectedX = null;
+                                selectedY = null;
+                                player.Text = game._currentPlayer == game._black ? "Black is playing" : "White is playing";
+                            }
+                            else
+                            {
+                                labelMessage.Text = "Not a valid piece to move.";
+                                this.Cell[(int)selectedX, (int)selectedY].BackColor = firstClickUnselectedColor;
+                                selectedX = null;
+                                selectedY = null;
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
     }
