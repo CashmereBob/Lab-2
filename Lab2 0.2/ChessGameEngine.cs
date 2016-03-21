@@ -39,7 +39,7 @@ namespace Lab2_0._2
 
         public void Turn()
         {
-            if (_ai._roundsWithoutPawnMove <= 100)
+            if (_ai._roundsWithoutPawnMove <= 50)
             {
                 // Kontrollerar vems tur det är genom att kontrollera vilken den senaste spelaren var.
                 if (_opponentPlayer == _black)
